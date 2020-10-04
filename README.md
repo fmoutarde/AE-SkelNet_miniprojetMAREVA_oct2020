@@ -1,12 +1,12 @@
 # Mini-projet AE-SkelNet pour la reconnaissance de gestes (MINES_Paris, option MAREVA, oct.2020)
 
-L'idée est de combiner l'algorithme [SkelNet proposé par G. Devineau, F. Moutarde, W. Xi and J. Yang](https://ieeexplore.ieee.org/document/8373818) et la partie encodeur d'un auto-encodeur de posture, pour voir si l'application de SkelNet sur une représentation des postures plus réduite et combinant les informations spatiales des diverses articulations permet d'améliorer les résultats de reconnaissance de gestes par SkelNet.
+L'idée est de combiner l'algorithme [SkelNet proposé par G. Devineau, F. Moutarde, W. Xi and J. Yang](https://ieeexplore.ieee.org/document/8373818) qui reconnait les gestes par convolutions temporelles des trajectoires d'articulations, et la **partie encodeur d'un auto-encodeur de posture**, pour voir si l'application de SkelNet sur une représentation des postures plus réduite et combinant les informations spatiales des diverses articulations permet d'améliorer les résultats de reconnaissance de gestes par SkelNet.
 
 Dans un premier temps, il est suggéré de se familiariser avec le [concept d'auto-encodeur avec une vidéo explicative](https://www.youtube.com/watch?v=g-KVHf0A2kI). Dans un second temps, il est utile de bien comprendre le principe et l'architecture de SkelNet : multiples convolutions temporelles (donc 1D) traitant séparément chaque série temporelle avant de fusionner le tout pour classifier les gestes. Voir plus bas dans ce ReadMe pour plus de détails.
 
-Le principe dans notre cas est d'apprendre à reconstruire une posture grâce à un auto-encodeur et récupérer la projection de chacune des postures dans l'espace réduit (ou espace latent ou bottleneck) puis d'appliquer SkelNet sur les postures transformées avec la partie encodeur concaténées sous la forme de séries temporelles (une série par composante de l'espace latent) pour correspondre au fonctionnement de SkelNet.
+Le principe dans notre cas est d'apprendre à reconstruire une posture grâce à un auto-encodeur et récupérer la projection de chacune des postures dans l'espace réduit (ou espace latent ou bottleneck), puis d'appliquer SkelNet sur les postures transformées avec la partie encodeur concaténées sous la forme de séries temporelles (une série par composante de l'espace latent) pour correspondre au fonctionnement de SkelNet.
 
-L'idée sous-jacente est que l'on espère avec l'auto-encodeur capturer une certaine sémantique *spatiale* des postures dans le jeu de données, tandis que SkelNet fonde sa reconnaissance des gestes essentiellement sur l'aspect *temporel* des séries.
+**L'idée sous-jacente est que l'on espère avec l'auto-encodeur capturer une certaine sémantique *spatiale* des postures dans le jeu de données, tandis que SkelNet fonde sa reconnaissance des gestes essentiellement sur l'aspect *temporel* des séries.**
 
 ## Pipeline
 
