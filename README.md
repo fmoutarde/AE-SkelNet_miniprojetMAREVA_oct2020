@@ -13,10 +13,10 @@ L'idée sous-jacente est que l'on espère avec l'auto-encodeur capturer une cert
 Dans un premier temps, il vous faudra :
 1. Entrainer un auto-encodeur de POSTURE (de main, si c'est sur le dataset DHG, du corps entier si c'est sur le dataset NTU).
      PS : pour gagner du temps, vous pouvez utiliser le [dataset DHG déjà téléchargé+normalisé+sauvegardé sur GoogleDrive](https://drive.google.com/file/d/14kHA-5zexQjhXEPhq1oTAA-Uo3PrsaDZ/view?usp=sharing)
-2a. Fabriquer et sauvegarder des versions des bases d'apprentissage et de test *modifiées pour que les inputs soient les séquences de vecteurs latents* au lieu des séquences de positions d'articulations
-2b. Etudier la "sémantique" des composantes de l'espace latent en visualisant les "gestes" obtenus en décodant successivement des séquences de vecteurs latents dans lesquels seule une composante varie de façon continue (~ segment parallèle à un des axes dans l'espace latent)
-2c. Faire des **visualisations via T-Sne des *trajectoires* dans l'espace latent correspondant aux séquences de postures**, pour voir si les diverses réalisations d'une même classe de gestes ont des trajectoires similaires ; et si inversement les diverses classes de gestes ont des trajectoires typiques assez distinctes
-3. Entrainer SkelNet sur les datasets modifiés créés en 2a, évaluer les résultats, et les comparer avec ceux obtenus en appliquant SkelNet directement sur les séries temporelles des positions des articulations.
+2. Etudier la "sémantique" des composantes de l'espace latent en visualisant les "gestes" obtenus en décodant successivement des séquences de vecteurs latents où seule UNE composante varie, de façon continue (~ segment parallèle à un des axes dans l'espace latent)
+3. Faire des **visualisations via T-Sne des *trajectoires* dans l'espace latent correspondant aux séquences de postures**, pour voir si les diverses réalisations d'une même classe de gestes ont des trajectoires similaires ; et si inversement les diverses classes de gestes ont des trajectoires typiques assez distinctes
+4. Fabriquer et sauvegarder des versions des bases d'apprentissage et de test *modifiées pour que les inputs soient les séquences de vecteurs latents* au lieu des séquences de positions d'articulations
+5. Entrainer SkelNet sur les datasets modifiés créés en 4, évaluer les résultats, et les comparer avec ceux obtenus en appliquant SkelNet directement sur les séries temporelles des positions des articulations.
 
 ## Idées à creuser
 
