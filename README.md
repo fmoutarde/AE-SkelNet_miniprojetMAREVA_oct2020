@@ -1,3 +1,29 @@
+# Mini-projet AE-SkelNet pour la reconnaissance de gestes (MINES_Paris, option MAREVA, oct.2020)
+
+L'idée est de combiner l'algorithme [SkelNet proposé par G. Devineau, F. Moutarde, W. Xi and J. Yang](https://ieeexplore.ieee.org/document/8373818) et la partie encodeur d'un auto-encodeur de posture, pour voir si l'application de SkelNet sur une représentation des postures plus réduite et combinant les informations spatiales des diverses articulations permet d'améliorer les résultats de reconnaissance de gestes par SkelNet.
+
+Dans un premier temps, il est suggéré de se familiariser avec le [concept d'auto-encodeur avec une vidéo explicative](https://www.youtube.com/watch?v=g-KVHf0A2kI). Dans un second temps, il est utile de bien comprendre le principe et l'architecture de SkelNet : multiples convolutions temporelles (donc 1D) traitant séparément chaque série temporelle avant de fusionner le tout pour classifier les gestes. Voir plus bas dans ce ReadMe pour plus de détails.
+
+Le principe dans notre cas est d'apprendre à reconstruire une posture grâce à un auto-encodeur et récupérer la projection de chacune des postures dans l'espace réduit (ou espace latent ou bottleneck) puis d'appliquer SkelNet sur les postures transformées avec la partie encodeur concaténées sous la forme de séries temporelles (une série par composante de l'espace latent) pour correspondre au fonctionnement de SkelNet.
+
+L'idée sous-jacente est que l'on espère avec l'auto-encodeur capturer une certaine sémantique *spatiale* des postures dans le jeu de données, tandis que SkelNet fonde sa reconnaissance des gestes essentiellement sur l'aspect *temporel* des séries.
+
+## Pipeline
+
+Dans un premier temps, il vous faudra :
+1. Entrainer un auto-encodeur de POSTURE (de main, si c'est sur le dataset DHG, du corps entier si c'est sur le dataset NTU) 
+2. Faire des visualisations via T-Sne des *trajectoires* dans l'espace latent correspondant aux séquences de postures, pour voir si les diverses réalisations d'une même classe de gestes ont des trajectoires similaires ; et si inversement les diverses classes de gestes ont des trajectoires typiques assez distinctes
+3. Fabriquer et sauvegarder des versions des bases d'apprentissage et de test modifiées pour les inputs soient les séquences de vecteurs latents au lieu des séquences de positions d'articulations
+4. Entrainer SkelNet sur les données extraites en 3, évaluer les résultats (et les comparer avec ceux obtenus en appliquant SkelNet directement sur les séries temporelles des positions des articulations.
+
+## Idées à creuser
+
+Il y'a plein d'idées à creuser vis-à-vis de l'approche :
+ - Optimiser l'architecture de l'auto-encodeur (gridsearch), optimiser les hyperparamètres (dropout, batch, optimizer:(adadelta, Adam, RMSProp), learning rate, fonctions d'activations, early_stopping, ReduceLronPlateau) et réaliser une première évaluation.
+ - Jouer sur la taille de l'espace latent et faire des visualisations via T-Sne dans le code puis faire une étude de l'importance de la taille de l'espace latent dans : la qualité de reconstruction de l'AE et la qualité de classification de l'approche complète.
+ - Au lieu de traiter le problème en deux étapes distinctes, concatener le réseau SkelNet à la partie encodeur de l'AE et finetuner l'approche, ce qui donnera une architecture optimisée de bout en bout.
+
+
 # Deep Learning for Hand Gesture Recognition
 
 This repository holds ```keras``` and ```pytorch``` implementations of the deep learning model for hand gesture recognition introduced in the article [Deep Learning for Hand Gesture Recognition on Skeletal Data](https://ieeexplore.ieee.org/document/8373818) from G. Devineau, F. Moutarde, W. Xi and J. Yang.
