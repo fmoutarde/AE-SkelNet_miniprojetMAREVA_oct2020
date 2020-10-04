@@ -27,7 +27,7 @@ Il y'a plein d'idées à creuser vis-à-vis de l'approche :
  - **GENERER DES GESTES ARTIFICIELS** obtenus en décodant une succession de vecteurs latents correspondant à un segment, ou toute autre trajectoire unidmensionnelle dans l'espace latent.
 
 
-# Deep Learning for Hand Gesture Recognition
+# SkelNet approach for Skeletal Gestures Recognition (Deep-Learning using separate 1D temporal convolutions on each timeserie)
 
 This repository holds ```keras``` and ```pytorch``` implementations of the deep learning model for hand gesture recognition introduced in the article [Deep Learning for Hand Gesture Recognition on Skeletal Data](https://ieeexplore.ieee.org/document/8373818) from G. Devineau, F. Moutarde, W. Xi and J. Yang.
 
@@ -118,7 +118,7 @@ If you don't have any hand gesture available or if you want to reproduce the res
 
 The model expects gestures to be tensors of the following shape: ```(batch_size, duration, n_channels)```.
 
-For instance, if you want to recognize a batch of 32 gestures of length 100 on a hand skeletal constituted of 22 joints in 3D (x,y,z), i.e. 22x3=66 channels, the shape of the tensor should be : ```(32, 100, 66)```.
+For instance, if you want to recognize a batch of 32 gestures of length 100 on a hand skeleton constituted of 22 joints in 3D (x,y,z), i.e. 22x3=66 channels, the shape of the tensor should be : ```(32, 100, 66)```.
 
 ##### C. Load the gesture sequences data
 
