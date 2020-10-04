@@ -11,7 +11,8 @@ L'idée sous-jacente est que l'on espère avec l'auto-encodeur capturer une cert
 ## Pipeline
 
 Dans un premier temps, il vous faudra :
-1. Entrainer un auto-encodeur de POSTURE (de main, si c'est sur le dataset DHG, du corps entier si c'est sur le dataset NTU) 
+1. Entrainer un auto-encodeur de POSTURE (de main, si c'est sur le dataset DHG, du corps entier si c'est sur le dataset NTU).
+     PS : pour gagner du temps, vous pouvez utiliser le [dataset DHG déjà téléchargé+normalisé+sauvegardé sur GoogleDrive](https://drive.google.com/file/d/14kHA-5zexQjhXEPhq1oTAA-Uo3PrsaDZ/view?usp=sharing)
 2. Faire des visualisations via T-Sne des *trajectoires* dans l'espace latent correspondant aux séquences de postures, pour voir si les diverses réalisations d'une même classe de gestes ont des trajectoires similaires ; et si inversement les diverses classes de gestes ont des trajectoires typiques assez distinctes
 3. Fabriquer et sauvegarder des versions des bases d'apprentissage et de test modifiées pour les inputs soient les séquences de vecteurs latents au lieu des séquences de positions d'articulations
 4. Entrainer SkelNet sur les données extraites en 3, évaluer les résultats (et les comparer avec ceux obtenus en appliquant SkelNet directement sur les séries temporelles des positions des articulations.
